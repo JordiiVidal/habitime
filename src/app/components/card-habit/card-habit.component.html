@@ -4,7 +4,7 @@
     <mat-card-content>
         <p>{{ habit.description }}</p>
     </mat-card-content>
-    <button class="actions-habit" mat-icon-button>
+    <button class="actions-habit" mat-icon-button (click)="showEdit()">
         <mat-icon>more_vert</mat-icon>
       </button>
 </mat-card>

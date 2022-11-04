@@ -9,10 +9,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class HabitService {
 
   habitsS: Observable<Habit[]>;
+  isOpenedS: Observable<boolean>;
   private _habitsBS = new BehaviorSubject<Habit[]>([]);
+  private _isOpenedBS = new BehaviorSubject<boolean>(false);
 
   constructor() {
     this.habitsS = this._habitsBS.asObservable();
+    this.isOpenedS = this._isOpenedBS.asObservable();
   }
 
   create(habit: Habit) {
@@ -21,7 +24,15 @@ export class HabitService {
     this._habitsBS.next(habits);
   }
 
+  setOpened() {
+    this._isOpenedBS.next(!this.isOpened);
+  }
+
   get habits() {
     return this._habitsBS.getValue();
+  }
+
+  get isOpened() {
+    return this._isOpenedBS.getValue();
   }
 }

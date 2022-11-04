@@ -13,14 +13,12 @@ export class ListComponent implements OnInit {
   habits: Habit[];
 
   constructor(private habitService: HabitService) {
-    this.habits = [];
     this.date = new Date().toLocaleString();
+    this.habits = [];
   }
 
   ngOnInit(): void {
-    this.habitService.habitsS.subscribe((data) => {
-      this.habits = data;
-    })
+    this.habitService.habitsS.subscribe((data) => this.habits = data);
   }
 
 }

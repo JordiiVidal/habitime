@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { HabitService } from 'src/app/services/habit.service';
 
 @Component({
@@ -10,12 +11,14 @@ import { HabitService } from 'src/app/services/habit.service';
 export class FormHabitComponent implements OnInit {
 
   habitForm: FormGroup;
-  constructor(private habitService: HabitService) {
+  constructor(
+    private habitService: HabitService,
+    private _bottomSheetRef: MatBottomSheetRef<FormHabitComponent>
+  ) {
     this.habitForm = new FormGroup({
       name: new FormControl('', { validators: [Validators.required] }),
       description: new FormControl('', { validators: [Validators.required] }),
-    })
-
+    });
   }
 
   ngOnInit(): void {
@@ -25,5 +28,6 @@ export class FormHabitComponent implements OnInit {
     if (this.habitForm.errors) return;
     console.log(this.habitForm.value);
     this.habitService.create(this.habitForm.value);
+    this._bottomSheetRef.dismiss();
   }
 }

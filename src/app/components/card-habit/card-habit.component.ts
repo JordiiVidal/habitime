@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Habit } from 'src/app/models/habit.model';
+import { HabitService } from 'src/app/services/habit.service';
 
 @Component({
   selector: 'app-card-habit',
@@ -9,9 +10,12 @@ import { Habit } from 'src/app/models/habit.model';
 export class CardHabitComponent implements OnInit {
 
   @Input() habit: Habit;
-  constructor() { }
+  constructor(private _habitService: HabitService) { }
 
   ngOnInit(): void {
   }
 
+  showEdit() {
+    this._habitService.setOpened();
+  }
 }

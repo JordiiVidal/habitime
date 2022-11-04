@@ -8,13 +8,15 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardHabitComponent } from './components/card-habit/card-habit.component';
 import { FormHabitComponent } from './components/form-habit/form-habit.component';
+import { EditHabitComponent } from './components/edit-habit/edit-habit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
     CardHabitComponent,
-    FormHabitComponent
+    FormHabitComponent,
+    EditHabitComponent
   ],
   imports: [
     BrowserModule,
