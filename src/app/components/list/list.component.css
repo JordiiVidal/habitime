@@ -1,0 +1,22 @@
+.header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.card-habit {
+    width: 200px;
+    position: relative;
+}
+
+.card-habit button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}

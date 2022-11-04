@@ -18,7 +18,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.habitService.habits.subscribe((data) => {
+    this.habitService.habitsS.subscribe((data) => {
       this.habits = data;
     })
   }

@@ -1,6 +1,15 @@
-<p>{{date}}</p>
-<ul>
-    <li *ngFor="let habit of habits">
-        {{habit.name}}
-    </li>
-</ul>
+<div class="header">
+    <p>{{date}}</p>
+</div>
+<div class="content">
+    <mat-card *ngFor="let habit of habits" class="card-habit">
+        <mat-card-title>{{habit.name}}</mat-card-title>
+        <mat-card-subtitle class="text-muted">Habit</mat-card-subtitle>
+        <mat-card-content>
+            <p>{{ habit.description }}</p>
+        </mat-card-content>
+        <button class="actions-habit" mat-icon-button>
+            <mat-icon>more_vert</mat-icon>
+          </button>
+    </mat-card>
+</div>
