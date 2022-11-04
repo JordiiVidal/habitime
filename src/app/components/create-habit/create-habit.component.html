@@ -1,8 +1,14 @@
-<form [formGroup]="habitForm" (ngSubmit)="onSubmit()">
-    <h1>Create a habit</h1>
-    <label>Name</label>
-    <input type="name" name="name" formControlName="name">
-    <label>Description</label>
-    <textarea name="description" formControlName="description"></textarea>
-    <input type="submit" value="Create">
-</form>
+<div>
+    <form [formGroup]="habitForm" (ngSubmit)="onSubmit()">
+        <h1>CREATE HABIT</h1>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Dscription</mat-label>
+            <textarea matInput name="description" formControlName="description"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Create</button>
+    </form>
+</div>

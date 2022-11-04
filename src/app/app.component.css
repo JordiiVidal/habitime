@@ -2,3 +2,9 @@ body {
     width: 100vh;
     height: 100vh;
 }
+
+.btn-add-habbit {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
