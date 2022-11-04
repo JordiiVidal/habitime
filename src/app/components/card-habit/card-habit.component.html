@@ -1,0 +1,10 @@
+<mat-card class="card-habit" *ngIf="habit">
+    <mat-card-title>{{habit.name}}</mat-card-title>
+    <mat-card-subtitle class="text-muted">Habit</mat-card-subtitle>
+    <mat-card-content>
+        <p>{{ habit.description }}</p>
+    </mat-card-content>
+    <button class="actions-habit" mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+</mat-card>

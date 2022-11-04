@@ -9,14 +9,3 @@
     flex-direction: row;
     gap: 10px;
 }
-
-.card-habit {
-    width: 200px;
-    position: relative;
-}
-
-.card-habit button {
-    position: absolute;
-    right: 4px;
-    top: 8px;
-}

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateHabitComponent } from './create-habit.component';
+import { CardHabitComponent } from './card-habit.component';
 
-describe('CreateHabitComponent', () => {
-  let component: CreateHabitComponent;
-  let fixture: ComponentFixture<CreateHabitComponent>;
+describe('CardHabitComponent', () => {
+  let component: CardHabitComponent;
+  let fixture: ComponentFixture<CardHabitComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateHabitComponent ]
+      declarations: [ CardHabitComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateHabitComponent);
+    fixture = TestBed.createComponent(CardHabitComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

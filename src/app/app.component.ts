@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { CreateHabitComponent } from './components/create-habit/create-habit.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { FormHabitComponent } from './components/form-habit/form-habit.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,6 +13,6 @@ export class AppComponent {
   }
 
   onOpen() {
-    this._bottomSheet.open(CreateHabitComponent)
+    this._bottomSheet.open(FormHabitComponent)
   }
 }

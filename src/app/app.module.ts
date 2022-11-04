@@ -4,15 +4,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ListComponent } from './components/list/list.component';
-import { CreateHabitComponent } from './components/create-habit/create-habit.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CardHabitComponent } from './components/card-habit/card-habit.component';
+import { FormHabitComponent } from './components/form-habit/form-habit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    CreateHabitComponent
+    CardHabitComponent,
+    FormHabitComponent
   ],
   imports: [
     BrowserModule,

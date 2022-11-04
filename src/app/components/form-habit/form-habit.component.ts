@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Habit } from 'src/app/models/habit.model';
 import { HabitService } from 'src/app/services/habit.service';
 
 @Component({
-  selector: 'app-create-habit',
-  templateUrl: './create-habit.component.html',
-  styleUrls: ['./create-habit.component.css']
+  selector: 'app-form-habit',
+  templateUrl: './form-habit.component.html',
+  styleUrls: ['./form-habit.component.css']
 })
-export class CreateHabitComponent implements OnInit {
+export class FormHabitComponent implements OnInit {
 
   habitForm: FormGroup;
   constructor(private habitService: HabitService) {
