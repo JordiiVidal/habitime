@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardHabitComponent } from './components/card-habit/card-habit.component';
 import { FormHabitComponent } from './components/form-habit/form-habit.component';
 import { EditHabitComponent } from './components/edit-habit/edit-habit.component';
+import { NavigationComponent } from './features/navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { EditHabitComponent } from './components/edit-habit/edit-habit.component
     ListComponent,
     CardHabitComponent,
     FormHabitComponent,
-    EditHabitComponent
+    EditHabitComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

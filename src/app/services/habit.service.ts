@@ -24,7 +24,7 @@ export class HabitService {
     this._habitsBS.next(habits);
   }
 
-  setOpened() {
+  toggle() {
     this._isOpenedBS.next(!this.isOpened);
   }
 

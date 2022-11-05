@@ -1,15 +1,8 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <mat-sidenav-container class="example-sidenav-container" [hasBackdrop]="true" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-        <mat-sidenav #snav [position]="'end'" [opened]="isOpened" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-            <app-edit-habit></app-edit-habit>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <div>
-                <app-list></app-list>
-            </div>
-            <button mat-icon-button class="btn-add-habbit" (click)="onOpen()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+<div class="container">
+    <div class="content">
+        <app-list></app-list>
+    </div>
+    <button mat-icon-button class="btn-add-habbit" (click)="onOpen()">
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
