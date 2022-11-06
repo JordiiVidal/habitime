@@ -8,14 +8,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class HabitService {
 
-  habitsS: Observable<Habit[]>;
-  isOpenedS: Observable<boolean>;
+  habits$: Observable<Habit[]>;
+  isOpened$: Observable<boolean>;
   private _habitsBS = new BehaviorSubject<Habit[]>([]);
   private _isOpenedBS = new BehaviorSubject<boolean>(false);
 
   constructor() {
-    this.habitsS = this._habitsBS.asObservable();
-    this.isOpenedS = this._isOpenedBS.asObservable();
+    this.habits$ = this._habitsBS.asObservable();
+    this.isOpened$ = this._isOpenedBS.asObservable();
   }
 
   create(habit: Habit) {

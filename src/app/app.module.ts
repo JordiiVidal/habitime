@@ -9,7 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardHabitComponent } from './components/card-habit/card-habit.component';
 import { FormHabitComponent } from './components/form-habit/form-habit.component';
 import { EditHabitComponent } from './components/edit-habit/edit-habit.component';
-import { NavigationComponent } from './features/navigation/navigation.component';
+import { AppRoutingModule } from './app-routing.module';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -18,16 +20,19 @@ import { NavigationComponent } from './features/navigation/navigation.component'
     CardHabitComponent,
     FormHabitComponent,
     EditHabitComponent,
-    NavigationComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     SharedModule,
-    BrowserAnimationsModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigationComponent } from './navigation.component';
+import { BoardsListCardComponent } from './boards-list-card.component';
 
-describe('NavigationComponent', () => {
-  let component: NavigationComponent;
-  let fixture: ComponentFixture<NavigationComponent>;
+describe('BoardsListCardComponent', () => {
+  let component: BoardsListCardComponent;
+  let fixture: ComponentFixture<BoardsListCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ]
+      imports: [ BoardsListCardComponent ]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationComponent);
+    fixture = TestBed.createComponent(BoardsListCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
