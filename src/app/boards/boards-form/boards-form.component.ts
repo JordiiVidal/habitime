@@ -69,8 +69,8 @@ export class BoardsFormComponent implements OnInit {
 
   onSubmit() {
     if (this.boardForm.status != 'VALID') return;
-    let board = new Board(this.boardForm.value);
-    this._boardService.addBoard(board);
+    if(!this.dateRange.value.start || !this.dateRange.value.end) return;//TODO CUSTOM VALIDATION RANGE
+    this._boardService.addBoard(new Board(this.boardForm.value));
     this._bottomSheetRef.dismiss();
   }
 
