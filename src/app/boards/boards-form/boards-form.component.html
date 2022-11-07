@@ -1,0 +1,23 @@
+<form [formGroup]="boardForm" (ngSubmit)="onSubmit()">
+    <h1>Board</h1>
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" formControlName="name" [ngClass]="{'in-valid': name.valid}">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Goals</mat-label>
+        <mat-chip-list #chipList aria-label="Goals" multiple formControlName="goals">
+            <mat-chip *ngFor="let goal of goals.value" [selected]="goal" [value]="goal" (removed)="removeGoal(goal)">
+                {{goal}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+            </mat-chip>
+            <input placeholder="New goal" [matChipInputFor]="chipList" (matChipInputTokenEnd)="addGoalsFromInput($event)" [ngClass]="{'in-valid': goals.valid}">
+        </mat-chip-list>
+    </mat-form-field>
+    <mat-card class="inline-calendar-card" [ngClass]="{'in-valid': dateRange.valid}">
+        <mat-calendar [selected]="dateRange.value" (selectedChange)="_onSelectedChange($event)"></mat-calendar>
+    </mat-card>
+    <button mat-raised-button color="primary" class="btn-submit" type="submit">Create</button>
+</form>

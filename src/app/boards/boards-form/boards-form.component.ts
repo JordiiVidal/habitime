@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DateRange, DefaultMatCalendarRangeStrategy, MatDatepickerModule, MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatCardModule } from '@angular/material/card';
+import { BoardsService } from '../boards.service';
+import { Board } from '../board.model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 interface BoardForm extends FormGroup<{
   name: FormControl<string>;
@@ -24,12 +29,17 @@ interface BoardForm extends FormGroup<{
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCardModule,
+    MatIconModule,
   ],
-  templateUrl: './board-form.component.html',
+  templateUrl: './boards-form.component.html',
   styles: [
     '.mat-form-field{display: block}',
-    '::ng-deep .mat-calendar-table-header{display: none;}'
+    '::ng-deep .mat-calendar-table-header{display: none;}',
+    '::ng-deep .mat-calendar-header{padding: 0!important;}',
+    '.inline-calendar-card{width: 300px; margin: auto;padding-top: 8px;}',
+    '.btn-submit{margin: 16px 0px 8px 0; width: 100%;}'
   ],
   providers: [
     {
@@ -38,23 +48,30 @@ interface BoardForm extends FormGroup<{
     },
   ],
 })
-export class BoardFormComponent implements OnInit {
+export class BoardsFormComponent implements OnInit {
 
   boardForm: BoardForm;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private _boardService: BoardsService,
+    private _bottomSheetRef: MatBottomSheetRef<BoardsFormComponent>
+  ) { }
 
   ngOnInit(): void {
     let initDateRange = new DateRange(new Date(), null);
     this.boardForm = this.fb.group({
-      name: this.fb.control<string>('', { nonNullable: true }),
-      goals: this.fb.control<string[]>([], { nonNullable: true }),
-      dateRange: this.fb.control<DateRange<Date>>(initDateRange, { nonNullable: true }),
+      name: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
+      goals: this.fb.control<string[]>([], { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
+      dateRange: this.fb.control<DateRange<Date>>(initDateRange, { nonNullable: true, validators: [Validators.required] }),
     });
   }
 
   onSubmit() {
-
+    if (this.boardForm.status != 'VALID') return;
+    let board = new Board(this.boardForm.value);
+    this._boardService.addBoard(board);
+    this._bottomSheetRef.dismiss();
   }
 
   _onSelectedChange(date: Date): void {
@@ -81,22 +98,35 @@ export class BoardFormComponent implements OnInit {
   addGoalsFromInput(event: MatChipInputEvent) {
     if (event.value) {
       let goal = event.value;
-      let goals = this.boardForm.controls.goals.value;
-      if (!goals.includes(goal) && goals.length < 3) {
-        goals.push(goal);
-        this.boardForm.controls.goals.setValue(goals);
-        this.boardForm.updateValueAndValidity();
-      }
+      let goals = this.goals.value ?? [];
+      if (!goals.includes(goal) && goals.length < 3) goals.push(goal);
+      this.boardForm.controls.goals.setValue(goals);
       event.chipInput!.clear();
     }
   }
 
   removeGoal(goal: string) {
-    //this.keywords.delete(keyword);
+    let goals = this.goals.value ?? [];
+    if (goals && goals.includes(goal)) {
+      this.boardForm.controls.goals.setValue(goals.filter((g) => g != goal));
+    }
   }
 
   get form() {
     return this.boardForm.controls;
   }
+
+  get name() {
+    return this.boardForm.controls.name;
+  }
+
+  get goals() {
+    return this.boardForm.controls.goals;
+  }
+
+  get dateRange() {
+    return this.boardForm.controls.dateRange;
+  }
+
 
 }

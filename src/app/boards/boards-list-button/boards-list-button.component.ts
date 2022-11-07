@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { BoardFormComponent } from '../../board/board-form/board-form.component';
+import { BoardsFormComponent } from '../boards-form/boards-form.component';
 
 @Component({
   selector: 'app-boards-list-button',
@@ -26,6 +26,6 @@ export class BoardsListButtonComponent implements OnInit {
   }
 
   onClick() {
-    this._bottomSheet.open(BoardFormComponent);
+    this._bottomSheet.open(BoardsFormComponent);
   }
 }
