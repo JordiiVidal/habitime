@@ -14,16 +14,12 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatChipsModule, MatDividerModule],
   template: `
     <mat-card class="card-board" (click)="open()">
-      <mat-card-subtitle>Board</mat-card-subtitle>
       <mat-card-title>{{board.name}}</mat-card-title>
+      <mat-card-subtitle><span>{{ board.startDate | date }}</span></mat-card-subtitle>
       <mat-card-content>
         <mat-chip-list aria-label="Goals">
-          <mat-chip *ngFor="let goal of board.goals">{{ goal}}</mat-chip>
+          <mat-chip *ngFor="let goal of board.goals">{{ goal[0] | uppercase}}</mat-chip>
         </mat-chip-list>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-content>
-        <span>{{ board.startDate | date }}</span>-<span>{{ board.endDate | date }}</span>
       </mat-card-content>
     </mat-card>
   `,

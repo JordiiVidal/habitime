@@ -10,11 +10,14 @@ import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.co
   standalone: true,
   imports: [CommonModule, BoardsListButtonComponent, BoardsListCardComponent],
   template: `
-    <div>
+    <div class="cards">
       <app-boards-list-card *ngFor="let board of boards" [board]="board"></app-boards-list-card>
     </div>
     <app-boards-list-button></app-boards-list-button>
   `,
+  styles: [
+    '.cards{display: flex;flex-direction: row;gap: 20px;}'
+  ]
 })
 export class BoardsListComponent implements OnInit {
 

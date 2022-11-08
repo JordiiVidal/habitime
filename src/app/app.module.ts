@@ -15,6 +15,7 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { BoardsService } from './services/boards.service';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { BoardsService } from './services/boards.service';
     CardHabitComponent,
     FormHabitComponent,
     EditHabitComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

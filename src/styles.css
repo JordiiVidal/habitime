@@ -1,4 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    background: #202442;
+    width: 100%;
+    height: 100%;
+}
+
+.container .content {
+    flex: 1;
+    padding: 20px;
+}
+
+.center-vertically {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
