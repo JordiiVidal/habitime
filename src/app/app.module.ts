@@ -14,6 +14,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { BoardsService } from './services/boards.service';
 
 
 @NgModule({
@@ -33,10 +34,11 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     SharedModule,
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore()),    
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-ES'},
+    BoardsService,
   ],
   bootstrap: [AppComponent]
 })

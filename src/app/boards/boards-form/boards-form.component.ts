@@ -8,7 +8,7 @@ import { DateRange, DefaultMatCalendarRangeStrategy, MatDatepickerModule, MAT_DA
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { BoardsService } from '../../services/boards.service';
-import { Board } from '../../models/board.model';
+import { Board } from '../../interfaces/board.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
@@ -17,7 +17,6 @@ interface BoardForm extends FormGroup<{
   goals: FormControl<string[]>;
   startDate: FormControl<string>;
   endDate: FormControl<string>;
-  dateRange: FormControl<DateRange<Date>>;
 }> { }
 
 @Component({
@@ -53,6 +52,7 @@ interface BoardForm extends FormGroup<{
 export class BoardsFormComponent implements OnInit {
 
   boardForm: BoardForm;
+  dateRange: DateRange<Date>;
 
   constructor(
     private fb: FormBuilder,
@@ -61,40 +61,38 @@ export class BoardsFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let initDateRange = new DateRange(new Date(), null);
+    this.dateRange = new DateRange(new Date(), null);
     this.boardForm = this.fb.group({
       name: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       goals: this.fb.control<string[]>([], { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
       startDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       endDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
-      dateRange: this.fb.control<DateRange<Date>>(initDateRange, { nonNullable: true, validators: [Validators.required] }),
     });
   }
 
   onSubmit() {
     if (this.boardForm.status != 'VALID') return;
-    if (!this.dateRange.value.start || !this.dateRange.value.end) return;//TODO CUSTOM VALIDATION RANGE
-    this._boardService.addBoard(new Board(this.boardForm.value));
+    if (!this.dateRange.start || !this.dateRange.end) return;//TODO CUSTOM VALIDATION RANGE
+    this._boardService.create(this.boardForm.value as Board);
     this._bottomSheetRef.dismiss();
   }
 
   _onSelectedChange(date: Date): void {
     let newDateRange;
-    let currentDateRange = this.boardForm.controls.dateRange.value;
     if (
-      currentDateRange &&
-      currentDateRange.start &&
-      date > currentDateRange.start &&
-      !currentDateRange.end
+      this.dateRange &&
+      this.dateRange.start &&
+      date > this.dateRange.start &&
+      !this.dateRange.end
     ) {
       newDateRange = new DateRange(
-        currentDateRange.start,
+        this.dateRange.start,
         date
       );
     } else {
       newDateRange = new DateRange(date, null);
     }
-    this.boardForm.controls.dateRange.setValue(newDateRange);
+    this.dateRange = newDateRange;
     this.boardForm.controls.startDate.setValue(newDateRange.start?.toDateString() ?? '');
     this.boardForm.controls.endDate.setValue(newDateRange.end?.toDateString() ?? '');
     this.boardForm.updateValueAndValidity();
@@ -129,9 +127,12 @@ export class BoardsFormComponent implements OnInit {
     return this.boardForm.controls.goals;
   }
 
-  get dateRange() {
-    return this.boardForm.controls.dateRange;
+  get startDate(){
+    return this.boardForm.controls.startDate;
   }
 
+  get endDate(){
+    return this.boardForm.controls.endDate;
+  }
 
 }

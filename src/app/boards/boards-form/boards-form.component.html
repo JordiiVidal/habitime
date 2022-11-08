@@ -16,8 +16,8 @@
             <input placeholder="New goal" [matChipInputFor]="chipList" (matChipInputTokenEnd)="addGoalsFromInput($event)" [ngClass]="{'in-valid': goals.valid}">
         </mat-chip-list>
     </mat-form-field>
-    <mat-card class="inline-calendar-card" [ngClass]="{'in-valid': dateRange.valid}">
-        <mat-calendar [selected]="dateRange.value" (selectedChange)="_onSelectedChange($event)"></mat-calendar>
+    <mat-card class="inline-calendar-card">
+        <mat-calendar [selected]="dateRange" (selectedChange)="_onSelectedChange($event)"></mat-calendar>
     </mat-card>
     <button mat-raised-button color="primary" class="btn-submit" type="submit">Create</button>
 </form>

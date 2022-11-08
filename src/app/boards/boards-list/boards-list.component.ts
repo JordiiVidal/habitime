@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardsListButtonComponent } from '../boards-list-button/boards-list-button.component';
 import { BoardsService } from '../../services/boards.service';
-import { Board } from '../../models/board.model';
+import { Board } from '../../interfaces/board.interface';
 import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.component';
 
 @Component({
@@ -12,7 +12,6 @@ import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.co
   template: `
     <div>
       <app-boards-list-card *ngFor="let board of boards" [board]="board"></app-boards-list-card>
-      <div *ngIf="boards.length == 0">Empty</div>
     </div>
     <app-boards-list-button></app-boards-list-button>
   `,

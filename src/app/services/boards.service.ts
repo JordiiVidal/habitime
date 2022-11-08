@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
+import { Firestore, collection, CollectionReference, DocumentData, collectionData, addDoc } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Board } from '../models/board.model';
+import { Board } from '../interfaces/board.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BoardsService {
 
+  private collection: CollectionReference<DocumentData>;
   boards$ = new Observable<Board[]>();
   private _boardsBS = new BehaviorSubject<Board[]>([]);
-  constructor() {
+  constructor(private readonly firestore: Firestore) {
+    this.collection = collection(this.firestore, 'boards');
     this.boards$ = this._boardsBS.asObservable();
+    this.getAll();
   }
 
-  addBoard(board: Board) {
-    let boards = this.boards;
-    boards.push(board);
-    this._boardsBS.next(boards);
+  async create(board: Board) {
+    await addDoc(this.collection, board);
+    this.getAll();
+  }
+
+  getAll(){
+    const data = collectionData(this.collection, {idField: 'id'}) as Observable<Board[]>;
+    data.subscribe(data => this._boardsBS.next(data));
   }
 
   get boards() {

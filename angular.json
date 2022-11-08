@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "habitime:build:production",
+            "firebaseProject": "habitime-ba1a9",
+            "firebaseHostingSite": "habitime-ba1a9"
+          }
         }
       }
     }

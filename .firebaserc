@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "habitime-ba1a9": {
+      "hosting": {
+        "habitime": [
+          "habitime-ba1a9"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "habitime-ba1a9"
+  }
+}
