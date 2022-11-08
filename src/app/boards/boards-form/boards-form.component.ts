@@ -7,14 +7,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { DateRange, DefaultMatCalendarRangeStrategy, MatDatepickerModule, MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
-import { BoardsService } from '../boards.service';
-import { Board } from '../board.model';
+import { BoardsService } from '../../services/boards.service';
+import { Board } from '../../models/board.model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 interface BoardForm extends FormGroup<{
   name: FormControl<string>;
   goals: FormControl<string[]>;
+  startDate: FormControl<string>;
+  endDate: FormControl<string>;
   dateRange: FormControl<DateRange<Date>>;
 }> { }
 
@@ -63,13 +65,15 @@ export class BoardsFormComponent implements OnInit {
     this.boardForm = this.fb.group({
       name: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       goals: this.fb.control<string[]>([], { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
+      startDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
+      endDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       dateRange: this.fb.control<DateRange<Date>>(initDateRange, { nonNullable: true, validators: [Validators.required] }),
     });
   }
 
   onSubmit() {
     if (this.boardForm.status != 'VALID') return;
-    if(!this.dateRange.value.start || !this.dateRange.value.end) return;//TODO CUSTOM VALIDATION RANGE
+    if (!this.dateRange.value.start || !this.dateRange.value.end) return;//TODO CUSTOM VALIDATION RANGE
     this._boardService.addBoard(new Board(this.boardForm.value));
     this._bottomSheetRef.dismiss();
   }
@@ -90,8 +94,9 @@ export class BoardsFormComponent implements OnInit {
     } else {
       newDateRange = new DateRange(date, null);
     }
-    console.log(newDateRange);
     this.boardForm.controls.dateRange.setValue(newDateRange);
+    this.boardForm.controls.startDate.setValue(newDateRange.start?.toDateString() ?? '');
+    this.boardForm.controls.endDate.setValue(newDateRange.end?.toDateString() ?? '');
     this.boardForm.updateValueAndValidity();
   }
 

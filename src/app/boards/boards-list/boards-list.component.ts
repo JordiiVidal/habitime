@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardsListButtonComponent } from '../boards-list-button/boards-list-button.component';
-import { BoardsService } from '../boards.service';
-import { Board } from '../board.model';
+import { BoardsService } from '../../services/boards.service';
+import { Board } from '../../models/board.model';
+import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.component';
 
 @Component({
   selector: 'app-boards-list',
   standalone: true,
-  imports: [CommonModule, BoardsListButtonComponent],
+  imports: [CommonModule, BoardsListButtonComponent, BoardsListCardComponent],
   template: `
     <div>
-      <div *ngFor="let board of boards">{{board.name}}</div>
+      <app-boards-list-card *ngFor="let board of boards" [board]="board"></app-boards-list-card>
+      <div *ngIf="boards.length == 0">Empty</div>
     </div>
     <app-boards-list-button></app-boards-list-button>
   `,

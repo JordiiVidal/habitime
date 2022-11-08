@@ -4,7 +4,7 @@ import { BoardsListComponent } from './boards/boards-list/boards-list.component'
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'boards' },
-    { path: 'boards', component: BoardsListComponent },
+    { path: 'boards', title: 'My Boards', component: BoardsListComponent },
 ];
 
 @NgModule({

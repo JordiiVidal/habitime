@@ -1,11 +1,12 @@
-import { DateRange } from "@angular/material/datepicker";
-
 export class Board {
+    id?: string;
     name: string;
     goals: string[];
-    dateRange: DateRange<Date>;
+    startDate: string;
+    endDate: string;
 
     public constructor(init?: Partial<Board>) {
         Object.assign(this, init);
     }
+
 }
