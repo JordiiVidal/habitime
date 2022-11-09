@@ -7,7 +7,12 @@ import { FormHabitComponent } from './components/form-habit/form-habit.component
     <div class="container">
       <app-sidebar></app-sidebar>
       <div class="content">
-        <router-outlet></router-outlet>
+        <div class="content-title">
+          <span>Boards</span>
+        </div>
+        <div class="content-body">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   `,

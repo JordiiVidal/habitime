@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <div>
-        iconos
+    <div *ngFor="let nav of sidebarNavs" [ngClass]="{'selected': nav.index == indexSelected}" (click)="onClick(nav.index)">
+        <img [src]="nav.srcIcon">
     </div>
 </div>

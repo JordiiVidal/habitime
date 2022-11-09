@@ -1,10 +1,26 @@
 .sidebar {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 58vh;
-    width: 120px;
+    justify-content: space-around;
     background-color: #2F3569;
     border-radius: 60px;
-    margin-left: 10px;
+    margin-left: 20px;
+}
+
+.sidebar div {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sidebar div img {
+    padding: 30px 15px;
+    width: 32px;
+}
+
+.sidebar div.selected img {
+    border-radius: 32px;
+    background-color: #6168b3;
+    transform: scale(1.02);
+    box-shadow: 2px 0px 15px 1px rgb(26 27 40);
 }
