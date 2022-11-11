@@ -24,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     </mat-card>
   `,
   styles: [
-    '.card-board { width: 200px;position: relative;}',
+    '.card-board { width: 200px;position: relative; cursor:pointer;}',
   ]
 })
 export class BoardsListCardComponent implements OnInit {

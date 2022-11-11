@@ -15,7 +15,8 @@ import { BoardsFormComponent } from '../boards-form/boards-form.component';
     </button>
   `,
   styles: [
-    'button{ position: fixed; right: 20px; bottom: 20px;}'
+    'button{ position: fixed; right: 20px; bottom: 20px;}',
+    '::ng-deep .mat-flat-button.mat-warn,.mat-raised-button.mat-warn,.mat-fab.mat-warn,.mat-mini-fab.mat-warn { background-color: #51bba0!important;}'
   ]
 })
 export class BoardsListButtonComponent implements OnInit {
@@ -26,6 +27,8 @@ export class BoardsListButtonComponent implements OnInit {
   }
 
   onClick() {
-    this._bottomSheet.open(BoardsFormComponent);
+    this._bottomSheet.open(BoardsFormComponent, {
+      panelClass : 'bottom-sheet-boards-form',
+    });
   }
 }

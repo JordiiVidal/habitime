@@ -11,10 +11,10 @@ import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../interfaces/board.interface';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatDividerModule } from '@angular/material/divider';
 
 interface BoardForm extends FormGroup<{
   name: FormControl<string>;
-  goals: FormControl<string[]>;
   startDate: FormControl<string>;
   endDate: FormControl<string>;
 }> { }
@@ -33,13 +33,15 @@ interface BoardForm extends FormGroup<{
     MatChipsModule,
     MatCardModule,
     MatIconModule,
+    MatDividerModule,
   ],
   templateUrl: './boards-form.component.html',
   styles: [
+    '.content-form{ position: relative;padding: 20px 20px 0 20px;}',
     '.mat-form-field{display: block}',
     '::ng-deep .mat-calendar-table-header{display: none;}',
     '::ng-deep .mat-calendar-header{padding: 0!important;}',
-    '.inline-calendar-card{width: 300px; margin: auto;padding-top: 8px;}',
+    '.inline-calendar-card{width: 440px; margin: auto;}',
     '.btn-submit{margin: 16px 0px 8px 0; width: 100%;}'
   ],
   providers: [
@@ -64,7 +66,6 @@ export class BoardsFormComponent implements OnInit {
     this.dateRange = new DateRange(new Date(), null);
     this.boardForm = this.fb.group({
       name: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
-      goals: this.fb.control<string[]>([], { nonNullable: true, validators: [Validators.required, Validators.minLength(3)] }),
       startDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       endDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
     });
@@ -98,23 +99,6 @@ export class BoardsFormComponent implements OnInit {
     this.boardForm.updateValueAndValidity();
   }
 
-  addGoalsFromInput(event: MatChipInputEvent) {
-    if (event.value) {
-      let goal = event.value;
-      let goals = this.goals.value ?? [];
-      if (!goals.includes(goal) && goals.length < 3) goals.push(goal);
-      this.boardForm.controls.goals.setValue(goals);
-      event.chipInput!.clear();
-    }
-  }
-
-  removeGoal(goal: string) {
-    let goals = this.goals.value ?? [];
-    if (goals && goals.includes(goal)) {
-      this.boardForm.controls.goals.setValue(goals.filter((g) => g != goal));
-    }
-  }
-
   get form() {
     return this.boardForm.controls;
   }
@@ -122,11 +106,6 @@ export class BoardsFormComponent implements OnInit {
   get name() {
     return this.boardForm.controls.name;
   }
-
-  get goals() {
-    return this.boardForm.controls.goals;
-  }
-
   get startDate(){
     return this.boardForm.controls.startDate;
   }
