@@ -17,6 +17,7 @@ interface BoardForm extends FormGroup<{
   name: FormControl<string>;
   startDate: FormControl<string>;
   endDate: FormControl<string>;
+  createdDate: FormControl<string>;
 }> { }
 
 @Component({
@@ -30,10 +31,6 @@ interface BoardForm extends FormGroup<{
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule,
-    MatCardModule,
-    MatIconModule,
-    MatDividerModule,
   ],
   templateUrl: './boards-form.component.html',
   styles: [
@@ -53,6 +50,7 @@ interface BoardForm extends FormGroup<{
 })
 export class BoardsFormComponent implements OnInit {
 
+  today: Date;
   boardForm: BoardForm;
   dateRange: DateRange<Date>;
 
@@ -60,14 +58,17 @@ export class BoardsFormComponent implements OnInit {
     private fb: FormBuilder,
     private _boardService: BoardsService,
     private _bottomSheetRef: MatBottomSheetRef<BoardsFormComponent>
-  ) { }
+  ) { 
+    this.today = new Date(); 
+  }
 
   ngOnInit(): void {
-    this.dateRange = new DateRange(new Date(), null);
+    this.dateRange = new DateRange(this.today, null);
     this.boardForm = this.fb.group({
       name: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       startDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
       endDate: this.fb.control<string>('', { nonNullable: true, validators: [Validators.required] }),
+      createdDate: this.fb.control<string>(this.today.toDateString(), { nonNullable: true, validators: [Validators.required] }),
     });
   }
 
@@ -106,11 +107,11 @@ export class BoardsFormComponent implements OnInit {
   get name() {
     return this.boardForm.controls.name;
   }
-  get startDate(){
+  get startDate() {
     return this.boardForm.controls.startDate;
   }
 
-  get endDate(){
+  get endDate() {
     return this.boardForm.controls.endDate;
   }
 

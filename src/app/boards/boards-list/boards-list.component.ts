@@ -4,15 +4,26 @@ import { BoardsListButtonComponent } from '../boards-list-button/boards-list-but
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../interfaces/board.interface';
 import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-boards-list',
   standalone: true,
-  imports: [CommonModule, BoardsListButtonComponent, BoardsListCardComponent],
+  imports: [
+    CommonModule,
+    BoardsListButtonComponent,
+    BoardsListCardComponent,
+    MatGridListModule
+  ],
   template: `
-    <div class="cards">
-      <app-boards-list-card *ngFor="let board of boards" [board]="board"></app-boards-list-card>
-    </div>
+    <mat-grid-list cols="4" [gutterSize]="'20px'" rowHeight="2:0.5">
+      <mat-grid-tile
+          *ngFor="let board of boards"
+          [colspan]="2"
+          [rowspan]="row">
+          <app-boards-list-card [board]="board"></app-boards-list-card>
+      </mat-grid-tile>
+    </mat-grid-list>
     <app-boards-list-button></app-boards-list-button>
   `,
   styles: [
@@ -21,11 +32,27 @@ import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.co
 })
 export class BoardsListComponent implements OnInit {
 
+  private _rows: number[];
+  private _lastRow: number;
   boards: Board[];
-  constructor(private boardsService: BoardsService) { }
+  constructor(private boardsService: BoardsService) {
+    this._rows = [3, 4, 5];
+  }
 
   ngOnInit(): void {
     this.boardsService.boards$.subscribe((b) => this.boards = b);
   }
 
+  get row(): number {
+    let row;
+    do {
+      row = this.rowRandom;
+    } while (row == this._lastRow)
+    this._lastRow = row;
+    return row;
+  }
+
+  get rowRandom(): number {
+    return this._rows[Math.floor(Math.random() * this._rows.length)]
+  }
 }

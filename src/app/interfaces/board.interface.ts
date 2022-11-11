@@ -4,4 +4,6 @@ export interface Board {
     goals: string[];
     startDate: string;
     endDate: string;
+    createdDate: string;
+    updatedDate: string;
 }
