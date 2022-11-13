@@ -5,13 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { DateRange, DefaultMatCalendarRangeStrategy, MatDatepickerModule, MAT_DATE_RANGE_SELECTION_STRATEGY } from '@angular/material/datepicker';
-import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
-import { MatCardModule } from '@angular/material/card';
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../interfaces/board.interface';
-import { MatIconModule } from '@angular/material/icon';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { MatDividerModule } from '@angular/material/divider';
 
 interface BoardForm extends FormGroup<{
   name: FormControl<string>;
@@ -32,7 +28,21 @@ interface BoardForm extends FormGroup<{
     MatFormFieldModule,
     MatInputModule,
   ],
-  templateUrl: './boards-form.component.html',
+  template: `
+  <div class="content-form">
+      <form [formGroup]="boardForm" (ngSubmit)="onSubmit()">
+          <h1>Board</h1>
+          <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput type="text" placeholder="Name" formControlName="name" [ngClass]="{'in-valid': name.valid}">
+          </mat-form-field>
+          <div class="inline-calendar-card">
+              <mat-calendar [selected]="dateRange" (selectedChange)="_onSelectedChange($event)"></mat-calendar>
+          </div>
+          <button mat-raised-button color="primary" class="btn-submit" type="submit" [disabled]="!boardForm.valid">Create</button>
+      </form>
+  </div>
+  `,
   styles: [
     '.content-form{ position: relative;padding: 20px 20px 0 20px;}',
     '.mat-form-field{display: block}',
@@ -48,7 +58,7 @@ interface BoardForm extends FormGroup<{
     },
   ],
 })
-export class BoardsFormComponent implements OnInit {
+export class BoardFormComponent implements OnInit {
 
   today: Date;
   boardForm: BoardForm;
@@ -57,7 +67,7 @@ export class BoardsFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private _boardService: BoardsService,
-    private _bottomSheetRef: MatBottomSheetRef<BoardsFormComponent>
+    private _bottomSheetRef: MatBottomSheetRef<BoardFormComponent>
   ) { 
     this.today = new Date(); 
   }

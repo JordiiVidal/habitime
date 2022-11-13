@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoardsListButtonComponent } from '../boards-list-button/boards-list-button.component';
+import { BoardListButtonComponent } from '../board-list-button/board-list-button.component';
 import { BoardsService } from '../../services/boards.service';
 import { Board } from '../../interfaces/board.interface';
-import { BoardsListCardComponent } from '../boards-list-card/boards-list-card.component';
+import { BoardListCardComponent } from '../board-list-card/board-list-card.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
@@ -11,8 +11,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
   standalone: true,
   imports: [
     CommonModule,
-    BoardsListButtonComponent,
-    BoardsListCardComponent,
+    BoardListButtonComponent,
+    BoardListCardComponent,
     MatGridListModule
   ],
   template: `
@@ -30,7 +30,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     '.cards{display: flex;flex-direction: row;gap: 20px;}'
   ]
 })
-export class BoardsListComponent implements OnInit {
+export class BoardListComponent implements OnInit {
 
   private _rows: number[];
   private _lastRow: number;

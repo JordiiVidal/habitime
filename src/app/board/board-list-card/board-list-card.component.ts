@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatChipsModule, MatDividerModule],
   template: `
-    <div class="card-board">
+    <div class="card-board" (click)="open()">
       <h3>{{board.name}}</h3>
       <div>
         <span>{{ board.startDate | date }}</span>
@@ -31,7 +31,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     '.card-board {cursor:pointer;background: white;height:inherit;width:100%;border-radius:25px;box-sizing: border-box;padding:20px;}',
   ]
 })
-export class BoardsListCardComponent implements OnInit {
+export class BoardListCardComponent implements OnInit {
 
   @Input() board: Board;
   @HostBinding('class') class = 'fit-content';
@@ -41,7 +41,7 @@ export class BoardsListCardComponent implements OnInit {
   }
 
   open() {
-    this.router.navigate(['board']);
+    this.router.navigate(['boards', this.board.id]);
   }
 
 }

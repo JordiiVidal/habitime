@@ -4,6 +4,7 @@ interface SidebarNavs{
   index: number;
   name: string;
   srcIcon: string;
+  route: string;
 }
 @Component({
   selector: 'app-sidebar',
@@ -17,9 +18,9 @@ export class SidebarComponent implements OnInit {
   sidebarNavs: SidebarNavs[];
   constructor() {
     this.sidebarNavs = [
-      {index : 0, srcIcon : 'assets/icons/dashboard.png', name: 'Dashboard'},
-      {index : 1, srcIcon : 'assets/icons/boards.png', name: 'Boards'},
-      {index : 2, srcIcon : 'assets/icons/goals.png', name: 'Goals'}
+      {index : 0, srcIcon : 'assets/icons/dashboard.png', name: 'Dashboard', route: 'dashboard'},
+      {index : 1, srcIcon : 'assets/icons/boards.png', name: 'Boards', route: 'boards'},
+      {index : 2, srcIcon : 'assets/icons/goals.png', name: 'Goals', route: 'goals'}
     ]
    }
 

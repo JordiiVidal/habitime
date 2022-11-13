@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { BoardsFormComponent } from '../boards-form/boards-form.component';
+import { BoardFormComponent } from '../board-form/board-form.component';
 
 @Component({
   selector: 'app-boards-list-button',
@@ -19,7 +19,7 @@ import { BoardsFormComponent } from '../boards-form/boards-form.component';
     '::ng-deep .mat-flat-button.mat-warn,.mat-raised-button.mat-warn,.mat-fab.mat-warn,.mat-mini-fab.mat-warn { background-color: #51bba0!important;}'
   ]
 })
-export class BoardsListButtonComponent implements OnInit {
+export class BoardListButtonComponent implements OnInit {
 
   constructor(private _bottomSheet: MatBottomSheet,) { }
 
@@ -27,7 +27,7 @@ export class BoardsListButtonComponent implements OnInit {
   }
 
   onClick() {
-    this._bottomSheet.open(BoardsFormComponent, {
+    this._bottomSheet.open(BoardFormComponent, {
       panelClass : 'bottom-sheet-boards-form',
     });
   }
